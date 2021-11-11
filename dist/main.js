@@ -10,23 +10,13 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/classes/car.js":
-/*!****************************!*\
-  !*** ./src/classes/car.js ***!
-  \****************************/
+/***/ "./src/car.js":
+/*!********************!*\
+  !*** ./src/car.js ***!
+  \********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nclass Car {\r\n  constructor(id, make, model, year) {\r\n    this.id = id;\r\n    this.make = make;\r\n    this.model = model;\r\n    this.year = year;\r\n  }\r\n\r\n  info() {\r\n    document.getElementById(\"car-make\").textContent = this.make;\r\n    document.querySelector(\"#car-model\").textContent = this.model;\r\n    document.querySelector(\"#car-year\").textContent = this.year;\r\n    document.querySelector(\"#car-card\").setAttribute(\"data-carId\", this.id);\r\n  }\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Car);\r\n\n\n//# sourceURL=webpack://es6_modules/./src/classes/car.js?");
-
-/***/ }),
-
-/***/ "./src/classes/wishlist.js":
-/*!*********************************!*\
-  !*** ./src/classes/wishlist.js ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _car__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./car */ \"./src/classes/car.js\");\n\r\n\r\nclass WishList {\r\n  constructor() {\r\n    this.list = [];\r\n    this.nextId = 0;\r\n  }\r\n\r\n  add(make, model, year) {\r\n    let car = new _car__WEBPACK_IMPORTED_MODULE_0__.default(this.nextId++, make, model, year);\r\n    this.list.push(car);\r\n    this.updateDOMWishList();\r\n  }\r\n\r\n  remove(carId) {\r\n    this.list = this.list.filter((car) => car.id != carId);\r\n    this.updateDOMWishList();\r\n    document.getElementById(\"car-make\").textContent = \"\";\r\n    document.querySelector(\"#car-model\").textContent = \"\";\r\n    document.querySelector(\"#car-year\").textContent = \"\";\r\n    document.querySelector(\"#car-card\").setAttribute(\"data-carId\", \"\");\r\n\r\n    if (this.list.length == 0) {\r\n      document.querySelector(\".removeBtn\").disabled = true;\r\n    }\r\n  }\r\n\r\n  updateDOMWishList() {\r\n    let container = document.querySelector(\"#wishListContainer\");\r\n    let ul = document.querySelector(\"ul\");\r\n    ul.innerHTML = \"\";\r\n    this.list.forEach((car) => {\r\n      let li = document.createElement(\"li\");\r\n      li.id = car.id;\r\n      li.textContent = car.model;\r\n      li.addEventListener(\"click\", () => {\r\n        console.log(\"click\");\r\n        document.querySelector(\".removeBtn\").disabled = false;\r\n        car.info();\r\n      });\r\n      ul.appendChild(li);\r\n    });\r\n    container.appendChild(ul);\r\n  }\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WishList);\r\n\n\n//# sourceURL=webpack://es6_modules/./src/classes/wishlist.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst carMake = document.getElementById(\"car-make\");\nconst carModel = document.getElementById(\"car-model\");\nconst carYear = document.getElementById(\"car-year\");\nconst removeBtn = document.getElementsByClassName(\"removeBtn\")[0];\n\nclass Car {\n    constructor(id, make, model, year) {\n        this.id = id;\n        this.make = make;\n        this.model = model;\n        this.year = year;\n    } \n    info() {\n        carMake.textContent = this.make;\n        carModel.textContent = this.model;\n        carYear.textContent = this.year;\n        removeBtn.id = this.id;\n    }\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Car);\n\n\n\n//# sourceURL=webpack://es6_modules/./src/car.js?");
 
 /***/ }),
 
@@ -36,7 +26,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _classes_wishlist__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./classes/wishlist */ \"./src/classes/wishlist.js\");\n\r\n\r\nconsole.log(\"Working\");\r\n\r\nlet form = document.querySelector(\"#submitForm\");\r\n\r\nlet wishlist = new _classes_wishlist__WEBPACK_IMPORTED_MODULE_0__.default();\r\n\r\nform.addEventListener(\"submit\", (event) => {\r\n  console.log(event);\r\n  event.preventDefault();\r\n\r\n  let make = event.target[0].value;\r\n  let model = event.target[1].value;\r\n  let year = event.target[2].value;\r\n\r\n  wishlist.add(make, model, year);\r\n});\r\n\r\ndocument.querySelector(\".removeBtn\").addEventListener(\"click\", (event) => {\r\n  let carId = event.target.parentElement.getAttribute(\"data-carId\");\r\n  wishlist.remove(carId);\r\n});\r\n\n\n//# sourceURL=webpack://es6_modules/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _wishlist__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./wishlist */ \"./src/wishlist.js\");\n\n\nconst removeBtn = document.getElementsByClassName(\"removeBtn\")[0];\n\nconst form = document.getElementById(\"submitForm\");\n\nlet wishList = new _wishlist__WEBPACK_IMPORTED_MODULE_0__[\"default\"]();\nform.addEventListener(\"submit\", (e) => {\n    e.preventDefault();\n    wishList.add();\n})\n\nremoveBtn.addEventListener(\"click\", (e) => {\n    wishList.remove(e.target.id);\n})\n\n\n//# sourceURL=webpack://es6_modules/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/wishlist.js":
+/*!*************************!*\
+  !*** ./src/wishlist.js ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _car__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./car */ \"./src/car.js\");\n\n\nconst make = document.getElementById(\"makeInput\");\nconst model = document.getElementById(\"modelInput\");\nconst year = document.getElementById(\"yearInput\");\nconst ul = document.getElementById(\"ul\");\n\nconst carMake = document.getElementById(\"car-make\");\nconst carModel = document.getElementById(\"car-model\");\nconst carYear = document.getElementById(\"car-year\");\n\nclass WishList {\n    constructor(){\n        this.cars = []\n        this.nextid = 1;\n    }\n    add() {\n        let car = new _car__WEBPACK_IMPORTED_MODULE_0__[\"default\"] (this.nextid++, make.value, model.value, year.value)\n        this.cars.push(car) \n        let li = document.createElement(\"li\")\n        li.textContent = make.value\n        li.id = car.id\n        li.addEventListener(\"click\", () => car.info());\n        ul.appendChild(li);\n    } \n    remove(id) {\n        this.cars = this.cars.filter((car) => {\n            if (car.id == id) {\n                return false;\n            } else {\n                return true;\n            }\n        })\n        carMake.textContent = \"\";\n        carModel.textContent = \"\";\n        carYear.textContent = \"\";\n        let li = document.getElementById(id);\n        ul.removeChild(li);\n    }\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WishList);\n\n\n//# sourceURL=webpack://es6_modules/./src/wishlist.js?");
 
 /***/ })
 

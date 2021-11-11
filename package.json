@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/Bryantellius/es6_modules/issues"
   },
-  "homepage": "https://github.com/Bryantellius/es6_modules#readme"
+  "homepage": "https://github.com/Bryantellius/es6_modules#readme",
+  "devDependencies": {
+    "webpack": "^5.64.0",
+    "webpack-cli": "^4.9.1"
+  }
 }
